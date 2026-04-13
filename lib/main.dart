@@ -6,6 +6,7 @@ import 'screens/home_screen.dart';
 import 'screens/players_screen.dart';
 import 'screens/roulette_screen.dart';
 import 'state/game_state.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(
@@ -24,13 +25,9 @@ class CreditCardRouletteApp extends StatelessWidget {
     return MaterialApp(
       title: 'Credit Card Roulette',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1565C0),
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ThemeMode.system,
       initialRoute: '/',
       routes: {
         '/': (_) => const HomeScreen(),

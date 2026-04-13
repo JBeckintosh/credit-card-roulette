@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/player.dart';
 import '../state/game_state.dart';
+import '../theme/app_theme.dart';
 
 class AddPlayerScreen extends StatefulWidget {
   const AddPlayerScreen({super.key});
@@ -29,33 +30,23 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
     }
     final name = _nameController.text.trim();
     final price = double.parse(_priceController.text.trim());
-    final id =
-        DateTime.now().microsecondsSinceEpoch.toString();
+    final id = DateTime.now().microsecondsSinceEpoch.toString();
     context.read<GameState>().addPlayer(
-          Player(id: id, name: name, price: price),
-        );
+      Player(id: id, name: name, price: price),
+    );
     Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(18),
-      borderSide: BorderSide(
-        color: theme.colorScheme.outline,
-        width: 2.4,
-      ),
-    );
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Player', 
-          style: theme.textTheme.headlineMedium
-        ),
+        title: Text('Add Player', style: theme.textTheme.headlineMedium),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppTokens.spaceL),
           child: Form(
             key: _formKey,
             child: Column(
@@ -67,18 +58,6 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                   decoration: InputDecoration(
                     labelText: 'Player name',
                     labelStyle: theme.textTheme.titleMedium,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 20,
-                    ),
-                    border: inputBorder,
-                    enabledBorder: inputBorder,
-                    focusedBorder: inputBorder.copyWith(
-                      borderSide: BorderSide(
-                        color: theme.colorScheme.primary,
-                        width: 3,
-                      ),
-                    ),
                   ),
                   textCapitalization: TextCapitalization.words,
                   validator: (v) {
@@ -97,18 +76,6 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                     hintText: 'e.g. 24.99',
                     labelStyle: theme.textTheme.titleMedium,
                     hintStyle: theme.textTheme.titleSmall,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 20,
-                    ),
-                    border: inputBorder,
-                    enabledBorder: inputBorder,
-                    focusedBorder: inputBorder.copyWith(
-                      borderSide: BorderSide(
-                        color: theme.colorScheme.primary,
-                        width: 3,
-                      ),
-                    ),
                     prefixText: '\$ ',
                   ),
                   keyboardType: const TextInputType.numberWithOptions(
@@ -136,7 +103,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                     child: FilledButton(
                       onPressed: _submit,
                       style: FilledButton.styleFrom(
-                        minimumSize: const Size.fromHeight(68),
+                        minimumSize: const Size.fromHeight(56),
                       ),
                       child: Text(
                         'Add Player!',

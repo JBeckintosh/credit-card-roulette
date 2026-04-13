@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../models/player.dart';
 import '../services/roulette_service.dart';
 import '../state/game_state.dart';
+import '../theme/app_theme.dart';
 
 class RouletteScreen extends StatefulWidget {
   const RouletteScreen({super.key});
@@ -19,20 +20,21 @@ class _RouletteScreenState extends State<RouletteScreen> {
   List<Player> _players = [];
   Player? _winner;
   bool _failed = false;
+
   /// Non-null during countdown: 5, 4, 3, 2, 1.
   int? _countdownValue;
   bool _resultShown = false;
   static const _sectionColors = <Color>[
-    Color(0xFFE53935),
-    Color(0xFF1E88E5),
-    Color(0xFF43A047),
-    Color(0xFFFB8C00),
-    Color(0xFF8E24AA),
-    Color(0xFF00ACC1),
-    Color(0xFFD81B60),
-    Color(0xFFFDD835),
-    Color(0xFF5E35B1),
-    Color(0xFF00897B),
+    Color(0xFFBFA68D),
+    Color(0xFF8F7A66),
+    Color(0xFFD7C4B0),
+    Color(0xFFA98F75),
+    Color(0xFFCDB79F),
+    Color(0xFF7D6958),
+    Color(0xFFE6D6C7),
+    Color(0xFF937E6A),
+    Color(0xFFB89F86),
+    AppTokens.accent,
   ];
 
   static const double _pieSectionRadius = 225.0;
@@ -94,9 +96,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
   @override
   Widget build(BuildContext context) {
     if (_failed || _winner == null || _players.isEmpty) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     final winner = _winner!;
@@ -117,8 +117,10 @@ class _RouletteScreenState extends State<RouletteScreen> {
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        final size = math.min(constraints.maxWidth,
-                            constraints.maxHeight * 1.3);
+                        final size = math.min(
+                          constraints.maxWidth,
+                          constraints.maxHeight * 1.3,
+                        );
                         return Center(
                           child: SizedBox(
                             width: size,
@@ -148,8 +150,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
                                   height: _centerHoleRadius * 2,
                                   child: Center(
                                     child: AnimatedSwitcher(
-                                      duration:
-                                          const Duration(milliseconds: 220),
+                                      duration: AppTokens.motionStandard,
                                       transitionBuilder: (child, animation) {
                                         return ScaleTransition(
                                           scale: animation,
@@ -163,16 +164,20 @@ class _RouletteScreenState extends State<RouletteScreen> {
                                           ? Text(
                                               '${_countdownValue!}',
                                               key: ValueKey<int>(
-                                                  _countdownValue!),
-                                              style: theme.textTheme.displayLarge
-                                                  ?.copyWith(
-                                                fontWeight: FontWeight.w900,
-                                                color: colorScheme.primary,
+                                                _countdownValue!,
                                               ),
+                                              style: theme
+                                                  .textTheme
+                                                  .displayLarge
+                                                  ?.copyWith(
+                                                    fontWeight: FontWeight.w900,
+                                                    color: colorScheme.primary,
+                                                  ),
                                             )
                                           : const SizedBox(
                                               key: ValueKey<String>(
-                                                  'no-countdown-center'),
+                                                'no-countdown-center',
+                                              ),
                                             ),
                                     ),
                                   ),
@@ -223,11 +228,12 @@ class _RouletteScreenState extends State<RouletteScreen> {
                         child: FilledButton(
                           onPressed: () {
                             context.read<GameState>().clearPlayers();
-                            Navigator.of(context)
-                                .pushNamedAndRemoveUntil('/', (route) => false);
+                            Navigator.of(
+                              context,
+                            ).pushNamedAndRemoveUntil('/', (route) => false);
                           },
                           style: FilledButton.styleFrom(
-                            minimumSize: const Size.fromHeight(68),
+                            minimumSize: const Size.fromHeight(56),
                           ),
                           child: Text(
                             'Play Again?',

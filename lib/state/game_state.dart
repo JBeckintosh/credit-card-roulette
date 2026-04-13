@@ -33,6 +33,5 @@ class GameState extends ChangeNotifier {
     notifyListeners();
   }
 
-  double get totalPrice =>
-      _players.fold<double>(0, (sum, p) => sum + p.price);
+  double get totalPrice => _players.fold<double>(0, (sum, p) => sum + p.price);
 }

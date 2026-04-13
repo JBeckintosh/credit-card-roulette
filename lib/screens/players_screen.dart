@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../state/game_state.dart';
+import '../theme/app_theme.dart';
 import '../widgets/player_row.dart';
 
 class PlayersScreen extends StatelessWidget {
@@ -25,9 +26,9 @@ class PlayersScreen extends StatelessWidget {
                           'No players yet.\n\nTap + to add someone.',
                           textAlign: TextAlign.center,
                           style: theme.textTheme.titleLarge?.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurfaceVariant,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurfaceVariant,
                           ),
                         ),
                       )
@@ -47,7 +48,12 @@ class PlayersScreen extends StatelessWidget {
               SafeArea(
                 top: false,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                  padding: const EdgeInsets.fromLTRB(
+                    AppTokens.spaceM,
+                    AppTokens.spaceS,
+                    AppTokens.spaceM,
+                    AppTokens.spaceM,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -56,8 +62,8 @@ class PlayersScreen extends StatelessWidget {
                           width: 72,
                           height: 72,
                           child: FilledButton(
-                            onPressed: () => Navigator.of(context)
-                                .pushNamed('/add-player'),
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed('/add-player'),
                             style: FilledButton.styleFrom(
                               shape: const CircleBorder(),
                               padding: EdgeInsets.zero,
@@ -66,18 +72,19 @@ class PlayersScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 40),
                       Align(
                         alignment: Alignment.center,
                         child: FractionallySizedBox(
                           widthFactor: 0.5,
                           child: FilledButton(
                             onPressed: game.canPlayRoulette
-                            ? () => Navigator.of(context)
-                                .pushNamed('/roulette')
-                            : null,
+                                ? () => Navigator.of(
+                                    context,
+                                  ).pushNamed('/roulette')
+                                : null,
                             style: FilledButton.styleFrom(
-                              minimumSize: const Size.fromHeight(68),
+                              minimumSize: const Size.fromHeight(56),
                             ),
                             child: Text(
                               'Roulette!',

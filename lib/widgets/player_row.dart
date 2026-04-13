@@ -21,15 +21,16 @@ class PlayerRow extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: ListTile(
-        title: Text(player.name,
-          style: theme.textTheme.titleLarge),
+        title: Text(player.name, style: theme.textTheme.titleLarge),
         subtitle: Text(
           '\$${player.price.toStringAsFixed(2)} - ${share.toStringAsFixed(1)}% share',
-          style: theme.textTheme.titleMedium
+          style: theme.textTheme.titleMedium,
         ),
         trailing: IconButton(
-          icon: const Icon(Icons.remove_circle_outline,
-            color: Colors.red),
+          icon: Icon(
+            Icons.remove_circle_outline,
+            color: theme.colorScheme.error,
+          ),
           tooltip: 'Remove player',
           onPressed: onRemove,
         ),

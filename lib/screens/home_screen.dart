@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_theme.dart';
+
 /// Landing page with title and [Start Game].
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppTokens.spaceL),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -23,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                   letterSpacing: 0.5,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppTokens.spaceM),
               Text(
                 'Whoever the wheel picks, pays.',
                 textAlign: TextAlign.center,
@@ -40,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () =>
                         Navigator.of(context).pushNamed('/players'),
                     style: FilledButton.styleFrom(
-                      minimumSize: const Size.fromHeight(68),
+                      minimumSize: const Size.fromHeight(56),
                     ),
                     child: Text(
                       'Add Players!',
@@ -51,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppTokens.spaceL),
             ],
           ),
         ),

@@ -4,10 +4,7 @@ import '../models/player.dart';
 
 /// Result of preparing a weighted spin: winner and total rotation (radians).
 class SpinPlan {
-  SpinPlan({
-    required this.winner,
-    required this.endRotationRadians,
-  });
+  SpinPlan({required this.winner, required this.endRotationRadians});
 
   final Player winner;
   final double endRotationRadians;
