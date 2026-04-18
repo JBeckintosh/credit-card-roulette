@@ -104,16 +104,17 @@ class _RouletteScreenState extends State<RouletteScreen> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final inCountdown = _countdownValue != null;
+    final isMobile = AppLayout.isMobileWidth(context);
 
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(isMobile ? 12 : 16),
               child: Column(
                 children: [
-                  const SizedBox(height: 16),
+                  SizedBox(height: isMobile ? 10 : 16),
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
@@ -202,7 +203,10 @@ class _RouletteScreenState extends State<RouletteScreen> {
                     Text(
                       winner.name,
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.headlineLarge?.copyWith(
+                      style: (isMobile
+                              ? theme.textTheme.headlineMedium
+                              : theme.textTheme.headlineLarge)
+                          ?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: colorScheme.primary,
                       ),
@@ -216,7 +220,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 150),
+                    SizedBox(height: isMobile ? 96 : 150),
                   ] else ...[
                     const SizedBox(height: 4),
                   ],
@@ -224,7 +228,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
                     Align(
                       alignment: Alignment.center,
                       child: FractionallySizedBox(
-                        widthFactor: 0.5,
+                        widthFactor: isMobile ? 0.78 : 0.5,
                         child: FilledButton(
                           onPressed: () {
                             context.read<GameState>().clearPlayers();
@@ -233,7 +237,11 @@ class _RouletteScreenState extends State<RouletteScreen> {
                             ).pushNamedAndRemoveUntil('/', (route) => false);
                           },
                           style: FilledButton.styleFrom(
-                            minimumSize: const Size.fromHeight(56),
+                            minimumSize: Size.fromHeight(
+                              isMobile
+                                  ? AppLayout.mobileButtonHeight
+                                  : AppLayout.desktopButtonHeight,
+                            ),
                           ),
                           child: Text(
                             'Play Again?',

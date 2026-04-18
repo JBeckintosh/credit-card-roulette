@@ -17,6 +17,19 @@ class AppTokens {
   static const Duration motionStandard = Duration(milliseconds: 220);
 }
 
+class AppLayout {
+  static const double mobileBreakpoint = 600;
+  static const double phoneFrameMaxWidth = 390;
+  static const double phoneOuterPadding = 10;
+  static const double mobilePagePadding = 16;
+  static const double desktopPagePadding = AppTokens.spaceL;
+  static const double mobileButtonHeight = 50;
+  static const double desktopButtonHeight = 56;
+
+  static bool isMobileWidth(BuildContext context) =>
+      MediaQuery.sizeOf(context).width <= mobileBreakpoint;
+}
+
 class AppTheme {
   static ThemeData light() {
     const scheme = ColorScheme(

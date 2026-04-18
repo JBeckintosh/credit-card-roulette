@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/player.dart';
+import '../theme/app_theme.dart';
 
 class PlayerRow extends StatelessWidget {
   const PlayerRow({
@@ -18,13 +19,17 @@ class PlayerRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final share = totalPrice > 0 ? (player.price / totalPrice) * 100 : 0.0;
+    final isMobile = AppLayout.isMobileWidth(context);
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      margin: EdgeInsets.symmetric(horizontal: isMobile ? 12 : 16, vertical: 6),
       child: ListTile(
-        title: Text(player.name, style: theme.textTheme.titleLarge),
+        title: Text(
+          player.name,
+          style: isMobile ? theme.textTheme.titleMedium : theme.textTheme.titleLarge,
+        ),
         subtitle: Text(
           '\$${player.price.toStringAsFixed(2)} - ${share.toStringAsFixed(1)}% share',
-          style: theme.textTheme.titleMedium,
+          style: isMobile ? theme.textTheme.bodyLarge : theme.textTheme.titleMedium,
         ),
         trailing: IconButton(
           icon: Icon(

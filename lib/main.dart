@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/add_player_screen.dart';
@@ -28,6 +29,7 @@ class CreditCardRouletteApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       themeMode: ThemeMode.system,
+      builder: (context, child) => _WebPhoneFrame(child: child),
       initialRoute: '/',
       routes: {
         '/': (_) => const HomeScreen(),
@@ -35,6 +37,56 @@ class CreditCardRouletteApp extends StatelessWidget {
         '/add-player': (_) => const AddPlayerScreen(),
         '/roulette': (_) => const RouletteScreen(),
       },
+    );
+  }
+}
+
+class _WebPhoneFrame extends StatelessWidget {
+  const _WebPhoneFrame({required this.child});
+
+  final Widget? child;
+
+  @override
+  Widget build(BuildContext context) {
+    final content = child ?? const SizedBox.shrink();
+    final isSmallMobile = kIsWeb && AppLayout.isMobileWidth(context);
+
+    if (!isSmallMobile) {
+      return content;
+    }
+
+    final scheme = Theme.of(context).colorScheme;
+    return ColoredBox(
+      color: scheme.surface,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(AppLayout.phoneOuterPadding),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: AppLayout.phoneFrameMaxWidth,
+            ),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: scheme.surface,
+                borderRadius: BorderRadius.circular(AppTokens.radiusL),
+                border: Border.all(color: scheme.outlineVariant, width: 1.2),
+                boxShadow: const [
+                  BoxShadow(
+                    blurRadius: 20,
+                    spreadRadius: 1,
+                    offset: Offset(0, 10),
+                    color: Color(0x22000000),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(AppTokens.radiusL),
+                child: content,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

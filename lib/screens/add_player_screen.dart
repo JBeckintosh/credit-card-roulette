@@ -40,13 +40,23 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isMobile = AppLayout.isMobileWidth(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Player', style: theme.textTheme.headlineMedium),
+        title: Text(
+          'Add Player',
+          style: isMobile
+              ? theme.textTheme.headlineSmall
+              : theme.textTheme.headlineMedium,
+        ),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppTokens.spaceL),
+          padding: EdgeInsets.all(
+            isMobile
+                ? AppLayout.mobilePagePadding
+                : AppLayout.desktopPagePadding,
+          ),
           child: Form(
             key: _formKey,
             child: Column(
@@ -67,7 +77,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: isMobile ? 12 : 16),
                 TextFormField(
                   controller: _priceController,
                   style: theme.textTheme.titleMedium,
@@ -75,7 +85,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                     labelText: 'Item price',
                     hintText: 'e.g. 24.99',
                     labelStyle: theme.textTheme.titleMedium,
-                    hintStyle: theme.textTheme.titleSmall
+                    hintStyle: theme.textTheme.titleSmall,
                   ),
                   keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,
@@ -98,11 +108,15 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                 Align(
                   alignment: Alignment.center,
                   child: FractionallySizedBox(
-                    widthFactor: 0.5,
+                    widthFactor: isMobile ? 0.78 : 0.5,
                     child: FilledButton(
                       onPressed: _submit,
                       style: FilledButton.styleFrom(
-                        minimumSize: const Size.fromHeight(56),
+                        minimumSize: Size.fromHeight(
+                          isMobile
+                              ? AppLayout.mobileButtonHeight
+                              : AppLayout.desktopButtonHeight,
+                        ),
                       ),
                       child: Text(
                         'Add Player!',

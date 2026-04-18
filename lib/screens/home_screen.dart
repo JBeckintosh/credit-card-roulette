@@ -9,10 +9,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isMobile = AppLayout.isMobileWidth(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(AppTokens.spaceL),
+          padding: EdgeInsets.all(
+            isMobile
+                ? AppLayout.mobilePagePadding
+                : AppLayout.desktopPagePadding,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -20,7 +25,10 @@ class HomeScreen extends StatelessWidget {
               Text(
                 'Credit Card Roulette',
                 textAlign: TextAlign.center,
-                style: theme.textTheme.displayLarge?.copyWith(
+                style: (isMobile
+                        ? theme.textTheme.displayMedium
+                        : theme.textTheme.displayLarge)
+                    ?.copyWith(
                   fontWeight: FontWeight.bold,
                   letterSpacing: 0.5,
                 ),
@@ -37,12 +45,16 @@ class HomeScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: FractionallySizedBox(
-                  widthFactor: 0.5,
+                  widthFactor: isMobile ? 0.78 : 0.5,
                   child: FilledButton(
                     onPressed: () =>
                         Navigator.of(context).pushNamed('/players'),
                     style: FilledButton.styleFrom(
-                      minimumSize: const Size.fromHeight(56),
+                      minimumSize: Size.fromHeight(
+                        isMobile
+                            ? AppLayout.mobileButtonHeight
+                            : AppLayout.desktopButtonHeight,
+                      ),
                     ),
                     child: Text(
                       'Add Players!',

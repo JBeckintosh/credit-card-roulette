@@ -11,6 +11,7 @@ class PlayersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isMobile = AppLayout.isMobileWidth(context);
     return Scaffold(
       body: Consumer<GameState>(
         builder: (context, game, _) {
@@ -33,7 +34,10 @@ class PlayersScreen extends StatelessWidget {
                         ),
                       )
                     : ListView.builder(
-                        padding: const EdgeInsets.only(top: 8, bottom: 8),
+                        padding: EdgeInsets.only(
+                          top: isMobile ? 4 : 8,
+                          bottom: isMobile ? 4 : 8,
+                        ),
                         itemCount: players.length,
                         itemBuilder: (context, index) {
                           final p = players[index];
@@ -48,19 +52,19 @@ class PlayersScreen extends StatelessWidget {
               SafeArea(
                 top: false,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(
+                  padding: EdgeInsets.fromLTRB(
                     AppTokens.spaceM,
-                    AppTokens.spaceS,
+                    isMobile ? 6 : AppTokens.spaceS,
                     AppTokens.spaceM,
-                    AppTokens.spaceM,
+                    isMobile ? AppTokens.spaceS : AppTokens.spaceM,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Center(
                         child: SizedBox(
-                          width: 72,
-                          height: 72,
+                          width: isMobile ? 62 : 72,
+                          height: isMobile ? 62 : 72,
                           child: FilledButton(
                             onPressed: () =>
                                 Navigator.of(context).pushNamed('/add-player'),
@@ -68,15 +72,18 @@ class PlayersScreen extends StatelessWidget {
                               shape: const CircleBorder(),
                               padding: EdgeInsets.zero,
                             ),
-                            child: const Icon(Icons.add, size: 36),
+                            child: Icon(
+                              Icons.add,
+                              size: isMobile ? 30 : 36,
+                            ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 40),
+                      SizedBox(height: isMobile ? 24 : 40),
                       Align(
                         alignment: Alignment.center,
                         child: FractionallySizedBox(
-                          widthFactor: 0.5,
+                          widthFactor: isMobile ? 0.78 : 0.5,
                           child: FilledButton(
                             onPressed: game.canPlayRoulette
                                 ? () => Navigator.of(
@@ -84,7 +91,11 @@ class PlayersScreen extends StatelessWidget {
                                   ).pushNamed('/roulette')
                                 : null,
                             style: FilledButton.styleFrom(
-                              minimumSize: const Size.fromHeight(56),
+                              minimumSize: Size.fromHeight(
+                                isMobile
+                                    ? AppLayout.mobileButtonHeight
+                                    : AppLayout.desktopButtonHeight,
+                              ),
                             ),
                             child: Text(
                               'Roulette!',
