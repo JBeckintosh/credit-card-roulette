@@ -75,8 +75,7 @@ class _AddPlayerScreenState extends State<AddPlayerScreen> {
                     labelText: 'Item price',
                     hintText: 'e.g. 24.99',
                     labelStyle: theme.textTheme.titleMedium,
-                    hintStyle: theme.textTheme.titleSmall,
-                    prefixText: '\$ ',
+                    hintStyle: theme.textTheme.titleSmall
                   ),
                   keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,

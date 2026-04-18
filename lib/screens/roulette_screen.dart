@@ -209,7 +209,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '💕 Thanks for covering the £${total.toStringAsFixed(2)} bill 💕',
+                      '💕 Thanks for covering the ${total.toStringAsFixed(2)} bill 💕',
                       textAlign: TextAlign.center,
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: colorScheme.onSurfaceVariant,
