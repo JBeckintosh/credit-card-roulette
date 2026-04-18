@@ -28,7 +28,7 @@ class PlayerRow extends StatelessWidget {
           style: isMobile ? theme.textTheme.titleMedium : theme.textTheme.titleLarge,
         ),
         subtitle: Text(
-          '\$${player.price.toStringAsFixed(2)} - ${share.toStringAsFixed(1)}% share',
+          '${player.price.toStringAsFixed(2)} - ${share.toStringAsFixed(1)}% share',
           style: isMobile ? theme.textTheme.bodyLarge : theme.textTheme.titleMedium,
         ),
         trailing: IconButton(
