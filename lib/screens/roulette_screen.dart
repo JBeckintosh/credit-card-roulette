@@ -25,16 +25,16 @@ class _RouletteScreenState extends State<RouletteScreen> {
   int? _countdownValue;
   bool _resultShown = false;
   static const _sectionColors = <Color>[
-    Color(0xFFBFA68D),
-    Color(0xFF8F7A66),
-    Color(0xFFD7C4B0),
-    Color(0xFFA98F75),
-    Color(0xFFCDB79F),
-    Color(0xFF7D6958),
-    Color(0xFFE6D6C7),
-    Color(0xFF937E6A),
-    Color(0xFFB89F86),
-    AppTokens.accent,
+    Color(0xFFFF8A80), // light red
+    Color(0xFFA5D6A7), // light green
+    Color(0xFF90CAF9), // light blue
+    Color(0xFFFFF59D), // light yellow
+    Color(0xFFCE93D8), // light purple
+    Color(0xFFFFCC80), // light orange
+    Color(0xFF80DEEA), // light cyan
+    Color(0xFFF8BBD0), // light pink
+    Color(0xFFC5E1A5), // light lime
+    Color(0xFFB39DDB), // light indigo
   ];
 
   static const double _pieSectionRadius = 225.0;

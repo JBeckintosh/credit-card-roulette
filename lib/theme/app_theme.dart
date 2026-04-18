@@ -46,29 +46,33 @@ class AppTheme {
   static ThemeData dark() {
     const scheme = ColorScheme(
       brightness: Brightness.dark,
-      primary: AppTokens.accentDark,
-      onPrimary: Color(0xFF221307),
-      secondary: Color(0xFFE8A666),
-      onSecondary: Color(0xFF28170A),
+      primary: Color(0xFFFFB869),
+      onPrimary: Color(0xFF2D1600),
+      secondary: Color(0xFFFFCC90),
+      onSecondary: Color(0xFF2F1600),
       error: Color(0xFFF2B8B5),
       onError: Color(0xFF601410),
-      surface: Color(0xFF141311),
-      onSurface: Color(0xFFE9E2DB),
-      onSurfaceVariant: Color(0xFFCFC5BA),
-      outline: Color(0xFF8F877D),
-      outlineVariant: Color(0xFF4D4741),
+      surface: Color(0xFF1A130D),
+      onSurface: Color(0xFFFFEEDD),
+      onSurfaceVariant: Color(0xFFF1D6B8),
+      outline: Color(0xFFE2A866),
+      outlineVariant: Color(0xFF8E6540),
       shadow: Colors.black,
       scrim: Color(0x7A000000),
-      inverseSurface: Color(0xFFE9E2DB),
-      onInverseSurface: Color(0xFF2F2A24),
-      inversePrimary: AppTokens.accent,
-      surfaceTint: AppTokens.accentDark,
+      inverseSurface: Color(0xFFFFE5C7),
+      onInverseSurface: Color(0xFF2D1A08),
+      inversePrimary: Color(0xFFE77E22),
+      surfaceTint: Color(0xFFFFB869),
     );
 
     return _base(scheme);
   }
 
   static ThemeData _base(ColorScheme scheme) {
+    final surfaceContainer = scheme.brightness == Brightness.dark
+        ? const Color(0xFF261B12)
+        : scheme.surface;
+
     final base = ThemeData(
       colorScheme: scheme,
       useMaterial3: true,
@@ -120,7 +124,7 @@ class AppTheme {
       ),
       cardTheme: CardThemeData(
         elevation: 0,
-        color: scheme.surface,
+        color: surfaceContainer,
         shape: roundedM,
         margin: const EdgeInsets.symmetric(
           horizontal: AppTokens.spaceM,
@@ -129,7 +133,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: scheme.surface,
+        fillColor: surfaceContainer,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppTokens.spaceM,
           vertical: 18,
