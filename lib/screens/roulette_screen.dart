@@ -37,9 +37,9 @@ class _RouletteScreenState extends State<RouletteScreen> {
     Color(0xFFB39DDB), // light indigo
   ];
 
-  static const double _pieSectionRadius = 225.0;
-  static const double _winnerSectionRadius = 265.5;
-  static const double _centerHoleRadius = 108.0;
+  static const double _pieSectionRadius = 100.0;
+  static const double _winnerSectionRadius = 118.0;
+  static const double _centerHoleRadius = 48.0;
 
   @override
   void initState() {
