@@ -6,6 +6,7 @@ import 'screens/add_player_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/players_screen.dart';
 import 'screens/roulette_screen.dart';
+import 'screens/terms_and_conditions_screen.dart';
 import 'state/game_state.dart';
 import 'theme/app_theme.dart';
 
@@ -36,6 +37,7 @@ class CreditCardRouletteApp extends StatelessWidget {
         '/players': (_) => const PlayersScreen(),
         '/add-player': (_) => const AddPlayerScreen(),
         '/roulette': (_) => const RouletteScreen(),
+        '/terms': (_) => const TermsAndConditionsScreen(),
       },
     );
   }

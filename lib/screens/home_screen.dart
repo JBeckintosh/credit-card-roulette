@@ -21,6 +21,13 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: TextButton(
+                  onPressed: () => Navigator.of(context).pushNamed('/terms'),
+                  child: const Text('Terms & Conditions'),
+                ),
+              ),
               const Spacer(flex: 2),
               Text(
                 'Credit Card Roulette',
