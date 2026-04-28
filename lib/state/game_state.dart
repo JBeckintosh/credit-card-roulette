@@ -6,9 +6,11 @@ import '../models/player.dart';
 class GameState extends ChangeNotifier {
   final List<Player> _players = [];
   String? _winnerName;
+  String? _selectedCurrency;
 
   List<Player> get players => List.unmodifiable(_players);
   String? get winnerName => _winnerName;
+  String? get selectedCurrency => _selectedCurrency;
 
   bool get canPlayRoulette => _players.length >= 2;
 
@@ -27,11 +29,32 @@ class GameState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setSelectedCurrency(String? currency) {
+    if (_selectedCurrency == currency) {
+      return;
+    }
+    _selectedCurrency = currency;
+    notifyListeners();
+  }
+
   void clearPlayers() {
     _players.clear();
     _winnerName = null;
+    _selectedCurrency = null;
     notifyListeners();
   }
 
   double get totalPrice => _players.fold<double>(0, (sum, p) => sum + p.price);
+
+  String formatAmount(double amount) {
+    final value = amount.toStringAsFixed(2);
+    final currency = _selectedCurrency;
+    if (currency == null || currency.isEmpty) {
+      return value;
+    }
+    if (currency == 'EUR') {
+      return '$value EUR';
+    }
+    return '$currency$value';
+  }
 }

@@ -99,8 +99,10 @@ class _RouletteScreenState extends State<RouletteScreen> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
+    final game = context.watch<GameState>();
     final winner = _winner!;
     final total = _players.fold<double>(0, (s, p) => s + p.price);
+    final formattedTotal = game.formatAmount(total);
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final inCountdown = _countdownValue != null;
@@ -213,7 +215,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '💕 Thanks for covering the ${total.toStringAsFixed(2)} bill 💕',
+                      '💕 Thanks for covering the $formattedTotal bill 💕',
                       textAlign: TextAlign.center,
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: colorScheme.onSurfaceVariant,

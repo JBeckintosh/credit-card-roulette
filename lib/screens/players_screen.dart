@@ -8,6 +8,8 @@ import '../widgets/player_row.dart';
 class PlayersScreen extends StatelessWidget {
   const PlayersScreen({super.key});
 
+  static const _currencyOptions = <String>['£', r'$', '€', '¥'];
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -35,7 +37,7 @@ class PlayersScreen extends StatelessWidget {
                       )
                     : ListView.builder(
                         padding: EdgeInsets.only(
-                          top: isMobile ? 4 : 8,
+                          top: isMobile ? 20 : 28,
                           bottom: isMobile ? 4 : 8,
                         ),
                         itemCount: players.length,
@@ -44,6 +46,7 @@ class PlayersScreen extends StatelessWidget {
                           return PlayerRow(
                             player: p,
                             totalPrice: total,
+                            amountText: game.formatAmount(p.price),
                             onRemove: () => game.removePlayer(p.id),
                           );
                         },
@@ -61,6 +64,23 @@ class PlayersScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      DropdownButtonFormField<String>(
+                        value: game.selectedCurrency,
+                        decoration: const InputDecoration(
+                          labelText: 'Currency',
+                        ),
+                        hint: const Text('Select currency (optional)'),
+                        items: _currencyOptions
+                            .map(
+                              (currency) => DropdownMenuItem<String>(
+                                value: currency,
+                                child: Text(currency),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: game.setSelectedCurrency,
+                      ),
+                      SizedBox(height: isMobile ? 18 : 24),
                       Center(
                         child: SizedBox(
                           width: isMobile ? 62 : 72,

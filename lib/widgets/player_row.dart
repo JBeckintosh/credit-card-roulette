@@ -8,11 +8,13 @@ class PlayerRow extends StatelessWidget {
     super.key,
     required this.player,
     required this.totalPrice,
+    required this.amountText,
     required this.onRemove,
   });
 
   final Player player;
   final double totalPrice;
+  final String amountText;
   final VoidCallback onRemove;
 
   @override
@@ -28,7 +30,7 @@ class PlayerRow extends StatelessWidget {
           style: isMobile ? theme.textTheme.titleMedium : theme.textTheme.titleLarge,
         ),
         subtitle: Text(
-          '${player.price.toStringAsFixed(2)} - ${share.toStringAsFixed(1)}% share',
+          '$amountText - ${share.toStringAsFixed(1)}% share',
           style: isMobile ? theme.textTheme.bodyLarge : theme.textTheme.titleMedium,
         ),
         trailing: IconButton(
