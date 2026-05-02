@@ -21,12 +21,13 @@ class PlayersScreen extends StatelessWidget {
           final total = game.totalPrice;
 
           return Column(
-            children: [
+            children: [              
+              const SizedBox(height: AppTokens.spaceXL),
               Expanded(
                 child: players.isEmpty
                     ? Center(
                         child: Text(
-                          'No players yet.\n\nTap + to add someone.',
+                          'No players yet.\n\nTap + to add a player.',
                           textAlign: TextAlign.center,
                           style: theme.textTheme.titleLarge?.copyWith(
                             color: Theme.of(
@@ -64,40 +65,45 @@ class PlayersScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      DropdownButtonFormField<String>(
-                        value: game.selectedCurrency,
-                        decoration: const InputDecoration(
-                          labelText: 'Currency',
-                        ),
-                        hint: const Text('Select currency (optional)'),
-                        items: _currencyOptions
-                            .map(
-                              (currency) => DropdownMenuItem<String>(
-                                value: currency,
-                                child: Text(currency),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: DropdownButtonFormField<String>(
+                              value: game.selectedCurrency,
+                              decoration: const InputDecoration(
+                                labelText: 'Currency',
                               ),
-                            )
-                            .toList(),
-                        onChanged: game.setSelectedCurrency,
-                      ),
-                      SizedBox(height: isMobile ? 18 : 24),
-                      Center(
-                        child: SizedBox(
-                          width: isMobile ? 62 : 72,
-                          height: isMobile ? 62 : 72,
-                          child: FilledButton(
-                            onPressed: () =>
-                                Navigator.of(context).pushNamed('/add-player'),
-                            style: FilledButton.styleFrom(
-                              shape: const CircleBorder(),
-                              padding: EdgeInsets.zero,
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              size: isMobile ? 30 : 36,
+                              hint: const Text('Select currency (optional)'),
+                              items: _currencyOptions
+                                  .map(
+                                    (currency) => DropdownMenuItem<String>(
+                                      value: currency,
+                                      child: Text(currency),
+                                    ),
+                                  )
+                                  .toList(),
+                              onChanged: game.setSelectedCurrency,
                             ),
                           ),
-                        ),
+                          SizedBox(width: isMobile ? 12 : 16),
+                          SizedBox(
+                            width: isMobile ? 62 : 72,
+                            height: isMobile ? 62 : 72,
+                            child: FilledButton(
+                              onPressed: () =>
+                                  Navigator.of(context).pushNamed('/add-player'),
+                              style: FilledButton.styleFrom(
+                                shape: const CircleBorder(),
+                                padding: EdgeInsets.zero,
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                size: isMobile ? 30 : 36,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: isMobile ? 24 : 40),
                       Align(
@@ -126,6 +132,7 @@ class PlayersScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      SizedBox(height: isMobile ? 14 : 22),
                     ],
                   ),
                 ),

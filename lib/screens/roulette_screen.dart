@@ -254,6 +254,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
                         ),
                       ),
                     ),
+                    SizedBox(height: isMobile ? 14 : 22),
                   ],
                 ],
               ),

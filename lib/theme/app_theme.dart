@@ -12,6 +12,7 @@ class AppTokens {
   static const double spaceS = 8;
   static const double spaceM = 16;
   static const double spaceL = 24;
+  static const double spaceXL = 36;
 
   static const Duration motionFast = Duration(milliseconds: 160);
   static const Duration motionStandard = Duration(milliseconds: 220);
